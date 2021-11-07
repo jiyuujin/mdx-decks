@@ -1,8 +1,9 @@
 import React from 'react'
 import Head from 'next/head'
+import fs from 'fs'
 import styles from '../static/Home.module.css'
 
-export default function Home() {
+export default function Home({ allFileNames }) {
   return (
     <div className={styles.container}>
       <Head>
@@ -12,48 +13,45 @@ export default function Home() {
 
       <main className={styles.main}>
         <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
+          Hello, <a href="https://yuma-kitamura.nekohack.me">Yuma Kitamura!</a>
         </h1>
 
         <p className={styles.description}>
-          Get started by editing <code className={styles.code}>pages/index.js</code>
+          Get started by editing <code className={styles.code}>pages/slide</code>
         </p>
 
         <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" className={styles.card}>
-            <h3>Documentation &rarr;</h3>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
-
-          <a href="https://nextjs.org/learn" className={styles.card}>
-            <h3>Learn &rarr;</h3>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
-
-          <a href="https://github.com/vercel/next.js/tree/master/examples" className={styles.card}>
-            <h3>Examples &rarr;</h3>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
-
-          <a
-            href="https://vercel.com/import?filter=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-          >
-            <h3>Deploy &rarr;</h3>
-            <p>Instantly deploy your Next.js site to a public URL with Vercel.</p>
-          </a>
+          {allFileNames.map((fileName: string) => {
+            return (
+              <a
+                key={fileName}
+                href={`/slide/${fileName.match(/([^/]*)\./)[1]}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={styles.card}
+              >
+                <h3>{fileName.match(/([^/]*)\./)[1]}</h3>
+                <p>{fileName}</p>
+              </a>
+            )
+          })}
         </div>
       </main>
 
       <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by <img src="/vercel.svg" alt="Vercel Logo" className={styles.logo} />
+        <a href="https://nekohack.me" target="_blank" rel="noopener noreferrer">
+          Powered by <img src="/nekohack.svg" alt="nekohack Logo" className={styles.logo} />
         </a>
       </footer>
     </div>
   )
+}
+
+export async function getStaticProps() {
+  const dirPath = 'pages/slide'
+  const allDir = fs.readdirSync(dirPath, { withFileTypes: true })
+  const allFileNames = allDir.filter((dirent) => dirent.isFile()).map(({ name }) => name)
+  return {
+    props: { allFileNames: allFileNames },
+  }
 }

@@ -1,0 +1,55 @@
+import { createContext, useContext, useState } from 'react'
+
+export const CurrentSlideContext = createContext({
+  currentSlide: 0,
+  setSlide: (currentSlide) => {},
+  currentStep: 0,
+  setCurrentStep: (currentStep) => {},
+  steps: [],
+  setSteps: (steps: []) => {},
+  addStep: (id) => {},
+  removeStep: (id) => {},
+  clearSteps: () => {},
+})
+
+export function CurrentSlideProvider({ children }) {
+  const initialSlide =
+    process.browser && window.location.hash ? parseInt(window.location.hash.replace('#', '')) : 0
+
+  const [currentSlide, setSlide] = useState(initialSlide)
+  const [currentStep, setCurrentStep] = useState(0)
+  const [steps, setSteps] = useState([])
+
+  const addStep = (id) => {
+    setSteps((prevSteps) => [...new Set([...prevSteps, id])])
+  }
+
+  const removeStep = (id) => {
+    setSteps((prevSteps) => [...prevSteps.filter((prevStep) => prevStep !== id)])
+  }
+
+  const clearSteps = () => {
+    setSteps([])
+    setCurrentStep(0)
+  }
+
+  return (
+    <CurrentSlideContext.Provider
+      value={{
+        currentSlide,
+        setSlide,
+        currentStep,
+        setCurrentStep,
+        steps,
+        setSteps,
+        addStep,
+        removeStep,
+        clearSteps,
+      }}
+    >
+      {children}
+    </CurrentSlideContext.Provider>
+  )
+}
+
+export const useCurrentSlide = () => useContext(CurrentSlideContext)
