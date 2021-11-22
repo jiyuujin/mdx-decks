@@ -56,7 +56,7 @@ export const SlideLayout = ({ children, next }) => {
 
   useEffect(() => {
     router.push(`${router.pathname}`, `${router.pathname}?mode=${mode}#${currentSlide}`)
-  }, [currentSlide, mode, router.pathname])
+  }, [currentSlide, mode, router, router.pathname])
 
   useEventListener('keydown', navigate)
 

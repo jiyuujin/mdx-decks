@@ -11,7 +11,7 @@ export const Step = ({ children, order, duration = 0.5 }) => {
     if (!steps.includes(order)) {
       addStep(order)
     }
-  }, [order, addStep, removeStep])
+  }, [order, addStep, removeStep, steps])
 
   const stepIndex = steps.findIndex((step) => step === order)
 
