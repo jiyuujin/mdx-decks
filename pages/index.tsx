@@ -50,7 +50,10 @@ export default function Home({ allFileNames }) {
 export async function getStaticProps() {
   const dirPath = 'pages/slide'
   const allDir = fs.readdirSync(dirPath, { withFileTypes: true })
-  const allFileNames = allDir.filter((dirent) => dirent.isFile()).map(({ name }) => name)
+  const allFileNames = allDir
+    .filter((dirent) => dirent.isFile())
+    .filter(({ name }) => name !== '.DS_Store')
+    .map(({ name }) => name)
   return {
     props: { allFileNames: allFileNames },
   }
