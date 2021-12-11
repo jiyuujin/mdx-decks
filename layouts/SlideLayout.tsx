@@ -56,7 +56,8 @@ export const SlideLayout = ({ children, next }) => {
 
   useEffect(() => {
     router.push(`${router.pathname}`, `${router.pathname}?mode=${mode}#${currentSlide}`)
-  }, [currentSlide, mode, router, router.pathname])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentSlide, mode, router.pathname])
 
   useEventListener('keydown', navigate)
 
