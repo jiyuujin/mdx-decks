@@ -21,7 +21,7 @@ export default function Home({ allFileNames }) {
         </p>
 
         <div className={styles.grid}>
-          {allFileNames.map((fileName: string) => {
+          {allFileNames?.map((fileName) => {
             return (
               <a
                 key={fileName}

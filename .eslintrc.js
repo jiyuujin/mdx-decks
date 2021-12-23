@@ -1,9 +1,13 @@
 module.exports = {
   extends: ['@nekohack/eslint-config-react'],
-  plugins: ['@typescript-eslint'],
   root: true,
   env: { node: true, es6: true },
-  parser: '@typescript-eslint/parser',
+  parser: "babel-eslint",
+  parserOptions: {
+    ecmaFeatures: {
+      jsx: true
+    }
+  },
   rules: {
     'react/react-in-jsx-scope': 'off',
     'react/prop-types': 'off',

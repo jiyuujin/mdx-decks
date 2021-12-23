@@ -10,7 +10,7 @@ export const ModeContext = createContext({
 export function ModeProvider({ children }) {
   const [mode, setMode] = useState(MODES.SLIDESHOW)
   const router = useRouter()
-  const newMode: any = router.query.mode
+  const newMode = router.query.mode
 
   useEffect(() => {
     if (newMode) setMode(newMode)

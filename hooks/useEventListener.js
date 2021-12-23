@@ -13,7 +13,6 @@ export const useEventListener = (eventName, handler) => {
     const isSupported = windowEl && windowEl.addEventListener
     if (!isSupported) return
 
-    // @ts-ignore
     const eventListener = (event) => savedHandler.current(event)
     windowEl.addEventListener(eventName, eventListener)
 

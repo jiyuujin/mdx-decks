@@ -6,7 +6,7 @@ export const CurrentSlideContext = createContext({
   currentStep: 0,
   setCurrentStep: (currentStep) => {},
   steps: [],
-  setSteps: (steps: []) => {},
+  setSteps: (steps) => {},
   addStep: (id) => {},
   removeStep: (id) => {},
   clearSteps: () => {},

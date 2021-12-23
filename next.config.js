@@ -14,5 +14,5 @@ module.exports = withMDX({
     }
     return config
   },
-  pageExtensions: ['ts', 'tsx', 'mdx'],
+  pageExtensions: ['js', 'jsx', 'mdx'],
 })
