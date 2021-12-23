@@ -1,7 +1,7 @@
 import React from 'react'
 import { shallow } from 'enzyme'
 
-import Home from '../pages/index'
+import Home from '../pages'
 
 describe('Content', () => {
   it('render correctly', () => {
